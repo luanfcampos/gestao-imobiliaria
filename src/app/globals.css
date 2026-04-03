@@ -17,6 +17,7 @@
   --color-alert: oklch(75% 0.18 85); /* Equivalent to amber-500 */
   --color-info: oklch(70% 0.18 240); /* Equivalent to blue-400 */
   --color-neutral: oklch(65% 0.01 240); /* Equivalent to zinc-400 */
+  --color-violet: oklch(60% 0.22 280); /* Equivalent to violet-500 */
 
   --shadow-color: 220 3% 5%; /* For shadow-black/20 */
   --shadow-strength: 10%;
