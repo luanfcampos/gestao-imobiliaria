@@ -39,20 +39,20 @@ export const columns: ColumnDef<Imovel>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status") as StatusImovel
-      let variant: "green" | "blue" | "yellow" | "gray" | "default" = "default"
+      let variant: "emerald" | "blue" | "amber" | "zinc" = "zinc"
 
       switch (status) {
         case StatusImovel.DISPONIVEL:
-          variant = "green"
+          variant = "emerald"
           break
         case StatusImovel.ALUGADO:
           variant = "blue"
           break
         case StatusImovel.MANUTENCAO:
-          variant = "yellow"
+          variant = "amber"
           break
         case StatusImovel.RESERVADO:
-          variant = "gray"
+          variant = "zinc"
           break
       }
 

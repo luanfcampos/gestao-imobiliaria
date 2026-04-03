@@ -61,14 +61,14 @@ export function ImovelTable<TData, TValue>({
           className="max-w-sm"
         />
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-lg border border-zinc-700 bg-zinc-800 shadow-lg shadow-black/20">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="border-b-zinc-800">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-zinc-400">
                       {header.isPlaceholder
                         ? null
                         : (
@@ -76,7 +76,7 @@ export function ImovelTable<TData, TValue>({
                             {...{
                               className: header.column.getCanSort()
                                 ? 'cursor-pointer select-none flex items-center'
-                                : '',
+                                : 'flex items-center',
                               onClick: header.column.getToggleSortingHandler(),
                             }}
                           >
@@ -102,6 +102,7 @@ export function ImovelTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="border-b-zinc-800 hover:bg-zinc-700"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -121,13 +122,13 @@ export function ImovelTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-between space-x-2 py-4">
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-zinc-400">
             Página {table.getState().pagination.pageIndex + 1} de{" "}
             {table.getPageCount()} | Total: {table.getFilteredRowModel().rows.length} registros
         </div>
         <div className="space-x-2">
             <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
@@ -135,7 +136,7 @@ export function ImovelTable<TData, TValue>({
             Anterior
             </Button>
             <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
