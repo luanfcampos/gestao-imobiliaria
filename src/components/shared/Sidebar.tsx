@@ -33,23 +33,21 @@ export function Sidebar() {
         <ul>
           {navItems.map((item) => (
             <li key={item.href} className="mb-2">
-              <Link href={item.href} legacyBehavior>
-                <a
-                  className={cn(
-                    "flex items-center p-2 rounded-md transition-colors",
-                    pathname === item.href
-                      ? "bg-gray-700 text-blue-300"
-                      : "hover:bg-gray-700"
-                  )}
-                >
-                  <item.icon className="mr-3 h-5 w-5" />
-                  {item.name}
-                </a>
+              <Link href={item.href} className={cn(
+                "flex items-center p-2 rounded-md transition-colors",
+                pathname === item.href
+                  ? "bg-gray-700 text-blue-300"
+                  : "hover:bg-gray-700"
+              )}>
+
+                <item.icon className="mr-3 h-5 w-5" />
+                {item.name}
+
               </Link>
             </li>
           ))}
         </ul>
       </nav>
     </aside>
-  )
+  );
 }
