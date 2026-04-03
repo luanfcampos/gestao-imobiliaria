@@ -11,6 +11,8 @@ export enum StatusImovel {
   DISPONIVEL = "Disponível",
   ALUGADO = "Alugado",
   VENDIDO = "Vendido",
+  MANUTENCAO = "Manutenção",
+  RESERVADO = "Reservado",
 }
 
 export enum IndiceReajuste {
