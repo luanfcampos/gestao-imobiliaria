@@ -8,10 +8,10 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        emerald: "border-transparent bg-emerald-500/20 text-emerald-400",
-        blue: "border-transparent bg-blue-500/20 text-blue-400",
-        amber: "border-transparent bg-amber-500/20 text-amber-400",
-        zinc: "border-transparent bg-zinc-500/20 text-zinc-400",
+        emerald: "border-transparent bg-[color:var(--color-success)_/20] text-[var(--color-success)]",
+        blue: "border-transparent bg-[color:var(--color-info)_/20] text-[var(--color-info)]",
+        amber: "border-transparent bg-[color:var(--color-alert)_/20] text-[var(--color-alert)]",
+        zinc: "border-transparent bg-[color:var(--color-neutral)_/20] text-[var(--color-neutral)]",
       },
     },
     defaultVariants: {
