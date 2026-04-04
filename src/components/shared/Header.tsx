@@ -26,7 +26,7 @@ export function Header() {
           <Bell className="h-5 w-5 text-[var(--color-text-secondary)]" />
         </button>
         <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center text-sm font-bold">
+            <div className="w-8 h-8 rounded-full bg-[var(--color-surface-raised)] flex items-center justify-center text-sm font-bold">
                 LU
             </div>
             <div className="flex flex-col text-sm">

@@ -17,7 +17,7 @@ export function Sidebar() {
   return (
     <aside className="w-60 min-h-screen bg-[var(--color-surface)] border-r border-[var(--color-border)] flex flex-col">
       <div className="flex items-center gap-3 h-16 px-4 border-b border-[var(--color-border)]">
-        <div className="bg-zinc-800 p-2 rounded-lg">
+        <div className="bg-[var(--color-surface-raised)] p-2 rounded-lg">
           <Building2 className="h-6 w-6 text-[var(--color-accent)]" />
         </div>
         <span className="text-xl font-bold text-[var(--color-text-primary)]">
