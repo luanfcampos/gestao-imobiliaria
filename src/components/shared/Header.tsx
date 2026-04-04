@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation"
 import { Bell, ChevronDown } from "lucide-react"
 
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 const getTitleFromPathname = (pathname: string): string => {
     if (pathname.startsWith("/imoveis")) return "Imóveis";
     if (pathname.startsWith("/contratos/novo")) return "Novo Contrato";
@@ -19,6 +21,7 @@ export function Header() {
     <header className="h-16 flex items-center justify-between px-6 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
       <h1 className="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
       <div className="flex items-center gap-4">
+        <ThemeToggle />
         <button className="p-2 rounded-full hover:bg-[var(--color-surface-raised)]">
           <Bell className="h-5 w-5 text-[var(--color-text-secondary)]" />
         </button>

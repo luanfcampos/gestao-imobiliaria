@@ -38,8 +38,8 @@ const kpiData = [
     value: "873",
     change: "+12% em relação ao mês passado",
     icon: FileText,
-    iconBgColor: "bg-[oklch(60%_0.22_280)]/20",
-    iconColor: "text-[oklch(60%_0.22_280)]",
+    iconBgColor: "bg-[var(--color-violet)]/20",
+    iconColor: "text-[var(--color-violet)]",
   },
   {
     title: "Taxa de Ocupação",
