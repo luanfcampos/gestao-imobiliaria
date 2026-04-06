@@ -5,14 +5,14 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
-        primary: "bg-[var(--color-accent)] text-white hover:bg-[color:var(--color-accent)_/80]",
+        primary: "bg-blue-600 text-white hover:bg-blue-700",
         secondary:
-          "bg-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[color:var(--color-border)_/80]",
-        ghost: "hover:bg-[var(--color-surface-raised)] hover:text-[var(--color-text-primary)]",
+          "bg-[var(--color-surface-raised)] text-[var(--color-text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-border)]",
+        ghost: "bg-transparent text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-raised)] hover:text-[var(--color-text-primary)]",
       },
       size: {
         default: "h-10 px-4 py-2",

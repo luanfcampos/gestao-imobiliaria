@@ -1,21 +1,21 @@
 import { z } from "zod";
 import { TipoImovel, IndiceReajuste } from "@/types";
 
-// Step 1: Informações do Locatário
+// Step 1: Detalhes do Imóvel
 export const stepUmSchema = z.object({
-  nomeCompleto: z.string().min(3, "Nome completo é obrigatório"),
-  cpf: z.string().regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido"),
-  email: z.string().email("Email inválido"),
-  telefone: z.string().min(10, "Telefone inválido"),
-});
-
-// Step 2: Detalhes do Imóvel
-export const stepDoisSchema = z.object({
   codigoImovel: z.string().min(1, "Código do imóvel é obrigatório"),
   enderecoCompleto: z.string().min(10, "Endereço completo é obrigatório"),
   tipoImovel: z.nativeEnum(TipoImovel, {
     message: "Selecione um tipo de imóvel válido.",
   }),
+});
+
+// Step 2: Informações do Locatário
+export const stepDoisSchema = z.object({
+  nomeCompleto: z.string().min(3, "Nome completo é obrigatório"),
+  cpf: z.string().regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido"),
+  email: z.string().email("Email inválido"),
+  telefone: z.string().min(10, "Telefone inválido"),
 });
 
 // Step 3: Condições do Contrato

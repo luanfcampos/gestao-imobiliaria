@@ -9,7 +9,7 @@ import { StepUm } from "./steps/StepUm";
 import { StepDois } from "./steps/StepDois";
 import { StepTres } from "./steps/StepTres";
 
-const stepFields = {
+const stepFields: Record<number, (keyof ContratoCompleto)[]> = {
   1: ["codigoImovel", "enderecoCompleto", "tipoImovel"],
   2: ["nomeCompleto", "cpf", "email", "telefone"],
   3: ["valorAluguel", "diaVencimento", "dataInicio", "duracaoMeses", "indiceReajuste"],
@@ -21,8 +21,8 @@ export const ContratoForm = () => {
   const { trigger, handleSubmit } = useContratoForm();
 
   const handleNext = async () => {
-    const fields = stepFields[currentStep as keyof typeof stepFields];
-    const isValid = await trigger(fields as any);
+    const fields = stepFields[currentStep];
+    const isValid = await trigger(fields);
     if (isValid) {
       setCurrentStep((prev) => prev + 1);
     }
