@@ -52,7 +52,7 @@ export default function ContratosPage() {
     const table = useReactTable({
         data: mockContratos,
         columns,
-        getCoreRowModel: getCoreRowodel(),
+        getCoreRowModel: getCoreRowModel(),
     });
 
   return (
