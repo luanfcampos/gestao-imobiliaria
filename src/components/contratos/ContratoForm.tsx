@@ -8,11 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { StepUm } from "./steps/StepUm";
 import { StepDois } from "./steps/StepDois";
 import { StepTres } from "./steps/StepTres";
+import { StepQuatro } from "./steps/StepQuatro";
 
-const stepFields: Record<number, (keyof ContratoCompleto)[]> = {
+const stepFields: Record<number, (keyof ContratoCompleto | "documentos")[]> = {
   1: ["codigoImovel", "enderecoCompleto", "tipoImovel"],
   2: ["nomeCompleto", "cpf", "email", "telefone"],
   3: ["valorAluguel", "diaVencimento", "dataInicio", "duracaoMeses", "indiceReajuste"],
+  4: [], // Step 4 não tem validação Zod
 };
 
 export const ContratoForm = () => {
@@ -21,8 +23,13 @@ export const ContratoForm = () => {
   const { trigger, handleSubmit } = useContratoForm();
 
   const handleNext = async () => {
+    // Não validar ao passar para o step de upload
+    if (currentStep === 3) {
+        setCurrentStep((prev) => prev + 1);
+        return;
+    }
     const fields = stepFields[currentStep];
-    const isValid = await trigger(fields);
+    const isValid = await trigger(fields as (keyof ContratoCompleto)[]);
     if (isValid) {
       setCurrentStep((prev) => prev + 1);
     }
@@ -58,9 +65,10 @@ export const ContratoForm = () => {
         <CardHeader>
             <CardTitle>Novo Contrato de Aluguel</CardTitle>
             <CardDescription>
-                Passo {currentStep} de 3 - {
+                Passo {currentStep} de 4 - {
                     currentStep === 1 ? "Detalhes do Imóvel" :
-                    currentStep === 2 ? "Informações do Locatário" : "Condições do Contrato"
+                    currentStep === 2 ? "Informações do Locatário" : 
+                    currentStep === 3 ? "Condições do Contrato" : "Upload de Documentos"
                 }
             </CardDescription>
         </CardHeader>
@@ -69,6 +77,7 @@ export const ContratoForm = () => {
                 {currentStep === 1 && <StepUm />}
                 {currentStep === 2 && <StepDois />}
                 {currentStep === 3 && <StepTres />}
+                {currentStep === 4 && <StepQuatro />}
             </form>
         </CardContent>
         <CardFooter className="flex justify-between">
@@ -78,10 +87,10 @@ export const ContratoForm = () => {
                 )}
             </div>
             <div>
-                {currentStep < 3 && (
+                {currentStep < 4 && (
                     <Button onClick={handleNext}>Próximo</Button>
                 )}
-                {currentStep === 3 && (
+                {currentStep === 4 && (
                     <Button onClick={handleSubmit(onSubmit)}>Gerar Contrato</Button>
                 )}
             </div>
