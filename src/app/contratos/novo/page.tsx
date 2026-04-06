@@ -1,8 +1,12 @@
+"use client";
+
+import { ContratoFormProvider } from "@/components/contratos/ContratoFormContext";
+import { ContratoForm } from "@/components/contratos/ContratoForm";
+
 export default function NovoContratoPage() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Novo Contrato</h1>
-      <p>Formulário para criação de um novo contrato.</p>
-    </div>
-  )
+    <ContratoFormProvider>
+      <ContratoForm />
+    </ContratoFormProvider>
+  );
 }
