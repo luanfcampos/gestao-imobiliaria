@@ -49,3 +49,5 @@ export type Contrato = {
   duracaoMeses: number;
   indiceReajuste: IndiceReajuste;
 };
+
+export type { ContratoCompleto } from "../lib/zod-schemas";

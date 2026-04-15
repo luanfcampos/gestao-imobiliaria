@@ -22,6 +22,8 @@ import { StepDois } from "./steps/StepDois";
 import { StepTres } from "./steps/StepTres";
 import { StepQuatro } from "./steps/StepQuatro";
 
+import DownloadPdfButton from "../pdf/DownloadPdfButton";
+
 const stepSchemas = {
   1: stepUmSchema,
   2: stepDoisSchema,
@@ -87,10 +89,8 @@ export const ContratoForm = () => {
                 <CardTitle>Contrato Gerado com Sucesso!</CardTitle>
                 <CardDescription>O contrato foi salvo e está pronto para download.</CardDescription>
             </CardHeader>
-            <CardContent>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                    Em breve, o botão para download do PDF aparecerá aqui.
-                </p>
+            <CardContent className="flex justify-center items-center py-8">
+               <DownloadPdfButton data={submittedData} />
             </CardContent>
         </Card>
     )
