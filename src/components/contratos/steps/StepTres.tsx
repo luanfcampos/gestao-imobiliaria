@@ -1,31 +1,31 @@
-import { useContratoForm } from "@/components/contratos/ContratoFormContext";
+import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { IndiceReajuste } from "@/types";
 
 export const StepTres = () => {
-  const { register, formState: { errors } } = useContratoForm();
+  const { register, formState: { errors } } = useFormContext();
 
   return (
     <div className="space-y-4">
       <div>
         <label htmlFor="valorAluguel" className="text-sm font-medium text-[var(--color-text-label)]">Valor do Aluguel (R$)</label>
         <Input id="valorAluguel" type="number" {...register("valorAluguel")} />
-        {errors.valorAluguel && <p className="text-red-500 text-xs mt-1">{errors.valorAluguel.message}</p>}
+        {errors.valorAluguel?.message && <p className="text-red-500 text-xs mt-1">{String(errors.valorAluguel.message)}</p>}
       </div>
       <div>
         <label htmlFor="diaVencimento" className="text-sm font-medium text-[var(--color-text-label)]">Dia do Vencimento</label>
         <Input id="diaVencimento" type="number" {...register("diaVencimento")} />
-        {errors.diaVencimento && <p className="text-red-500 text-xs mt-1">{errors.diaVencimento.message}</p>}
+        {errors.diaVencimento?.message && <p className="text-red-500 text-xs mt-1">{String(errors.diaVencimento.message)}</p>}
       </div>
       <div>
         <label htmlFor="dataInicio" className="text-sm font-medium text-[var(--color-text-label)]">Data de Início</label>
         <Input id="dataInicio" type="date" {...register("dataInicio")} />
-        {errors.dataInicio && <p className="text-red-500 text-xs mt-1">{errors.dataInicio.message}</p>}
+        {errors.dataInicio?.message && <p className="text-red-500 text-xs mt-1">{String(errors.dataInicio.message)}</p>}
       </div>
       <div>
         <label htmlFor="duracaoMeses" className="text-sm font-medium text-[var(--color-text-label)]">Duração (meses)</label>
         <Input id="duracaoMeses" type="number" {...register("duracaoMeses")} />
-        {errors.duracaoMeses && <p className="text-red-500 text-xs mt-1">{errors.duracaoMeses.message}</p>}
+        {errors.duracaoMeses?.message && <p className="text-red-500 text-xs mt-1">{String(errors.duracaoMeses.message)}</p>}
       </div>
        <div>
         <label htmlFor="indiceReajuste" className="text-sm font-medium text-[var(--color-text-label)]">Índice de Reajuste</label>
@@ -35,7 +35,7 @@ export const StepTres = () => {
             <option key={indice} value={indice}>{indice}</option>
           ))}
         </select>
-        {errors.indiceReajuste && <p className="text-red-500 text-xs mt-1">{errors.indiceReajuste.message}</p>}
+        {errors.indiceReajuste?.message && <p className="text-red-500 text-xs mt-1">{String(errors.indiceReajuste.message)}</p>}
       </div>
     </div>
   );

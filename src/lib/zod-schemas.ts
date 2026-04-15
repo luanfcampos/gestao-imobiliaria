@@ -20,12 +20,21 @@ export const stepDoisSchema = z.object({
 
 // Step 3: Condições do Contrato
 export const stepTresSchema = z.object({
-  valorAluguel: z.coerce.number({ message: "Deve ser um número" }).positive("O valor deve ser positivo"),
-  diaVencimento: z.coerce.number({ message: "Deve ser um número" }).int().min(1).max(31, "Dia inválido"),
+  valorAluguel: z.preprocess(
+    (val) => (val === "" ? undefined : Number(val)),
+    z.number({ message: "Deve ser um número" }).positive("O valor deve ser positivo")
+  ),
+  diaVencimento: z.preprocess(
+    (val) => (val === "" ? undefined : Number(val)),
+    z.number({ message: "Deve ser um número" }).int().min(1, "Dia inválido").max(31, "Dia inválido")
+  ),
   dataInicio: z.coerce.date({
     message: "Selecione uma data de início válida.",
   }),
-  duracaoMeses: z.coerce.number({ message: "Deve ser um número" }).int().positive("A duração deve ser positiva"),
+  duracaoMeses: z.preprocess(
+    (val) => (val === "" ? undefined : Number(val)),
+    z.number({ message: "Deve ser um número" }).int().positive("A duração deve ser positiva")
+  ),
   indiceReajuste: z.nativeEnum(IndiceReajuste, {
     message: "Selecione um índice válido.",
   }),

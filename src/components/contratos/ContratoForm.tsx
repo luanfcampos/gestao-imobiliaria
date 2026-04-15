@@ -1,36 +1,72 @@
 "use client";
 
 import { useState } from "react";
-import { useContratoForm } from "./ContratoFormContext";
-import { ContratoCompleto } from "@/lib/zod-schemas";
+import { useFormContext } from "react-hook-form";
+import {
+  ContratoCompleto,
+  stepUmSchema,
+  stepDoisSchema,
+  stepTresSchema,
+} from "@/lib/zod-schemas";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/Card";
 import { StepUm } from "./steps/StepUm";
 import { StepDois } from "./steps/StepDois";
 import { StepTres } from "./steps/StepTres";
 import { StepQuatro } from "./steps/StepQuatro";
 
-const stepFields: Record<number, (keyof ContratoCompleto | "documentos")[]> = {
-  1: ["codigoImovel", "enderecoCompleto", "tipoImovel"],
-  2: ["nomeCompleto", "cpf", "email", "telefone"],
-  3: ["valorAluguel", "diaVencimento", "dataInicio", "duracaoMeses", "indiceReajuste"],
-  4: [], // Step 4 não tem validação Zod
+const stepSchemas = {
+  1: stepUmSchema,
+  2: stepDoisSchema,
+  3: stepTresSchema,
 };
 
 export const ContratoForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [submittedData, setSubmittedData] = useState<ContratoCompleto | null>(null);
-  const { trigger, handleSubmit } = useContratoForm();
+  const [submittedData, setSubmittedData] = useState<ContratoCompleto | null>(
+    null
+  );
+  const { getValues, setError, handleSubmit, clearErrors } = useFormContext<ContratoCompleto>();
 
   const handleNext = async () => {
-    // Não validar ao passar para o step de upload
+    // A transição do passo 3 para o 4 é apenas para navegação, sem validação.
     if (currentStep === 3) {
-        setCurrentStep((prev) => prev + 1);
-        return;
+      setCurrentStep((prev) => prev + 1);
+      return;
     }
-    const fields = stepFields[currentStep];
-    const isValid = await trigger(fields as (keyof ContratoCompleto)[]);
-    if (isValid) {
+
+    // Pega o schema de validação para o passo atual.
+    const schema = stepSchemas[currentStep as keyof typeof stepSchemas];
+    if (!schema) {
+      // Se não houver schema, apenas avança (não deve acontecer para os passos 1 e 2).
+      setCurrentStep((prev) => prev + 1);
+      return;
+    }
+
+    clearErrors(); // Limpa erros anteriores antes de validar.
+
+    const data = getValues();
+    const result = schema.safeParse(data);
+
+    if (!result.success) {
+      // Se a validação falhar, define os erros manualmente para cada campo.
+      result.error.issues.forEach((error) => {
+        const field = error.path[0] as keyof ContratoCompleto;
+        setError(field, {
+          type: "manual",
+          message: error.message,
+        });
+      });
+      return; // Permanece no passo atual se houver erros
+    } else {
+      // Se a validação for bem-sucedida, avança para o próximo passo.
       setCurrentStep((prev) => prev + 1);
     }
   };
@@ -74,10 +110,10 @@ export const ContratoForm = () => {
         </CardHeader>
         <CardContent>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {currentStep === 1 && <StepUm />}
-                {currentStep === 2 && <StepDois />}
-                {currentStep === 3 && <StepTres />}
-                {currentStep === 4 && <StepQuatro />}
+                <div className={currentStep === 1 ? 'block' : 'hidden'}><StepUm /></div>
+                <div className={currentStep === 2 ? 'block' : 'hidden'}><StepDois /></div>
+                <div className={currentStep === 3 ? 'block' : 'hidden'}><StepTres /></div>
+                <div className={currentStep === 4 ? 'block' : 'hidden'}><StepQuatro /></div>
             </form>
         </CardContent>
         <CardFooter className="flex justify-between">
