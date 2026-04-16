@@ -57,6 +57,10 @@ O projeto conta com uma suíte de testes ponta-a-ponta (E2E) usando Playwright.
 
 **Para rodar os testes:**
 ```bash
+# Instala os navegadores necessários (apenas na primeira vez)
+npx playwright install
+
+# Executa os testes (sobe o servidor automaticamente)
 npx playwright test
 ```
 
